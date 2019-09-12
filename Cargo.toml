@@ -9,3 +9,4 @@ license = "Apache-2.0"
 
 [dependencies]
 serenity = "0.7.0"
+mice = "0.5.0"
