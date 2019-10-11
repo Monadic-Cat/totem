@@ -1,6 +1,6 @@
 extern crate serenity;
 
-use mice::prelude::*;
+use mice::{prelude::*, util::roll_capped};
 use serenity::client::{Client, Context, EventHandler};
 use serenity::model::{channel::Message, gateway::Ready};
 use std::env;
@@ -17,7 +17,7 @@ impl EventHandler for Totem {
 		if msg.content.starts_with(ROLLP) {
 			match msg.channel_id.say(
 				&ctx.http,
-				match roll(&msg.content[ROLLP.len()..]) {
+				match roll_capped(&msg.content[ROLLP.len()..], 10000) {
 					Ok(x) => x.format(MiceFormat::new().total_right()),
 					Err(x) => format!("{}", x),
 				},
